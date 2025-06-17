@@ -1,11 +1,13 @@
-import {LoginForm} from "./page/auth/LoginForm"
+import { createBrowserRouter, RouterProvider} from 'react-router';
+import routes from "./routes/routes";
 
+const router = createBrowserRouter(routes);
 function App() {
 
   return (
-    <>
-      <LoginForm />
-    </>
+    <div>
+      <RouterProvider router={router} />
+    </div>
   );
 }
 

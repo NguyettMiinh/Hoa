@@ -20,7 +20,7 @@ const loginSchema = yup.object().shape({
 });
 
 
-export const LoginForm = () => {
+const LoginForm = () => {
   const {
     register,
     handleSubmit,
@@ -77,3 +77,5 @@ export const LoginForm = () => {
 
   );
 }
+
+export default LoginForm;
