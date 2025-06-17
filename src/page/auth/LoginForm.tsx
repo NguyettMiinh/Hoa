@@ -37,7 +37,7 @@ export const LoginForm = () => {
   }
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+      <div className="card card-xl mt-10 sm:mx-auto sm:w-full sm:max-w-sm md:shadow-lg rounded-xl bg-white p-6">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
             <label className="block text-sm/6 font-medium text-gray-900">Email <span className="text-red-500">*</span> </label>
@@ -59,7 +59,7 @@ export const LoginForm = () => {
                 type="password" {...register("password")}
                 placeholder="Nhập mật khẩu"
                 className={`block w-full h-[40px] rounded-md border 
-                ${errors.email ? "border-red-500" : "border-input"} 
+                ${errors.password ? "border-red-500" : "border-input"} 
                 bg-white px-3 py-1.5 text-base text-gray-900 
                 placeholder:text-gray-400 sm:text-sm/6 focus:outline-none`}  />
               {errors.password && <span className="text-red-500 text-sm mt-1 block">{errors.password.message}</span>}
