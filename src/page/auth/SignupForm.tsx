@@ -11,6 +11,9 @@ type ISignupForm = {
     fullname: string;
     dob: string;
     gender: string;
+    isOver18: boolean;
+    isSubscribed: boolean;
+
 }
 // Define the validation schema using yup
 const signupSchema = yup.object().shape({
@@ -53,18 +56,26 @@ const SignUpForm = () => {
             phone: "",
             fullname: "",
             dob: "",
-            gender: "other",
+            gender: "2",
+            isOver18: false,
+            isSubscribed: false
         },
     });
     const onSubmit = (data: ISignupForm) => {
         console.log(data);
     }
-
+    const handleLogin = () => {
+        navigate("/login");
+    }
 
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-            <div className="card card-xl mt-10 sm:mx-auto sm:w-full sm:max-w-sm md:shadow-lg rounded-xl bg-white p-6">
+            <div className="card card-xl w-[440px] mt-10 mx-auto md:shadow-lg rounded-xl bg-white p-6">
+
                 <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col justify-center gap-4">
+                    <div className="text-xl font-bold mb-5">
+                        Đăng Ký Tài Khoản
+                    </div>
                     <div>
                         <label className="block text-sm/6 font-medium text-gray-900">Email <span className="text-red-500">*</span> </label>
                         <div className="mt-2">
@@ -132,20 +143,40 @@ const SignUpForm = () => {
                     <div>
                         <label className="block text-sm/6 font-medium text-gray-900"> Giới tính <span className="text-red-500">*</span></label>
                         <div className="mt-2">
-                            <select {...register("gender")} 
-                            className={`block w-full h-[40px] rounded-md border 
+                            <select {...register("gender")}
+                                className={`block w-full h-[40px] rounded-md border 
                                 ${errors.gender ? "border-red-500" : "border-input"} 
                                 bg-white px-3 py-1.5 text-base text-gray-900 
                                 placeholder:text-gray-400 sm:text-sm/6 focus:outline-none`} >
-                                <option value="other">Khác</option>
-                                <option value="male">Nam</option>
-                                <option value="female">Nữ</option>
+                                <option value="2">Khác</option>
+                                <option value="1">Nam</option>
+                                <option value="0">Nữ</option>
                             </select>
-                        </div>    
+                        </div>
+                    </div>
+                    <div className="flex justify-content text-[13px]">
+                        <input type="checkbox" {...register("isOver18")} className="h-[20px] w-[20px] mr-5" />
+                        Đăng ký nhận thông tin (Tùy chọn)
+                    </div>
+                    <div className="flex justify-content text-[13px]">
+                        <input type="checkbox" {...register("isSubscribed")} className="h-[20px] w-[20px] mr-5" />
+                        Tôi trên 16 tuổi và đồng ý với Điều khoản và Điền kiện
+                    </div>
+                    <div className=" text-[11px]">
+                        Bằng việc tiếp tục đăng ký, tôi xác nhận rằng tôi đã đọc và đồng ý với Điều khoản sử dụng và Chính sách bảo mật của MUJI, trong đó quy định cách MUJI thu thập, sử dụng và tiết lộ dữ liệu cá nhân của tôi cũng như các quyền mà tôi có theo luật hiện hành.
                     </div>
                     <div className="mt-5 mb-5">
                         <button type="submit"
-                            className="flex w-full h-[56px] items-center justify-center rounded-md bg-brand-darkRed px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-[#8c1932] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:bg-[#8c1932]">Tạo tài khoản mới</button>
+                            className="flex w-full h-[56px] items-center justify-center rounded-md bg-brand-darkRed px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-[#8c1932] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:bg-[#8c1932]">Tạo tài khoản mới
+                        </button>
+                    </div>
+                    <hr className="mt-1 border-t border-gray-300" />
+                    <div>
+                        <div className = "font-bold mt-3 mb-5">Đã có tài khoản</div>
+                        <button onClick={handleLogin}
+                            className="flex w-full h-[56px] items-center justify-center rounded-md border border-brand-darkRed bg-white px-3 py-1.5 text-sm/6 font-semibold text-brand-darkRed shadow-xs hover:bg-brand-darkRed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:bg-[#8c1932] hover:text-white">
+                            Đăng nhập ngay
+                        </button>
                     </div>
 
                 </form>
