@@ -65,7 +65,7 @@ const SignUpForm = () => {
         console.log(data);
     }
     const handleLogin = () => {
-        navigate("/login");
+        navigate("/layout/login");
     }
 
     return (
@@ -163,7 +163,7 @@ const SignUpForm = () => {
                         Tôi trên 16 tuổi và đồng ý với Điều khoản và Điền kiện
                     </div>
                     <div className=" text-[11px]">
-                        Bằng việc tiếp tục đăng ký, tôi xác nhận rằng tôi đã đọc và đồng ý với Điều khoản sử dụng và Chính sách bảo mật của MUJI, trong đó quy định cách MUJI thu thập, sử dụng và tiết lộ dữ liệu cá nhân của tôi cũng như các quyền mà tôi có theo luật hiện hành.
+                        Bằng việc tiếp tục đăng ký, tôi xác nhận rằng tôi đã đọc và đồng ý với Điều khoản sử dụng và Chính sách bảo mật của MUJI, trong đó quy định cách YUBI thu thập, sử dụng và tiết lộ dữ liệu cá nhân của tôi cũng như các quyền mà tôi có theo luật hiện hành.
                     </div>
                     <div className="mt-5 mb-5">
                         <button type="submit"
