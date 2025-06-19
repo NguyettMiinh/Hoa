@@ -1,26 +1,24 @@
-import { Layout, Menu } from 'antd';
-const { Header} = Layout;
+import { useEffect, useState } from 'react';
 function HeaderCommon() {
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 0);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
 
     return (
-        <Header style={{
-            position: 'sticky',
-            top: 0,
-            zIndex: 1,
-            width: '100%',
-            display: 'flex',
-            alignItems: 'center',
-        }}>
-            <div className="demo-logo" />
-        <Menu
-          theme="dark"
-          mode="horizontal"
-          defaultSelectedKeys={['2']}
-        //   items={items}
-          style={{ flex: 1, minWidth: 0 }}
-        />
-
-        </Header>
+       <header className={`flex flex-col gap-0 bg-white w-full sticky top-0 left-0 z-[100]
+        transition-transform duration-300 ${isScrolled ? '-translate-y-[40px]' : ""}`}>
+            <div className="bg-white h-[40px]"></div>
+            <div className="bg-brand-darkRed h-[40px]"></div>
+        </header>
     )
 }
 

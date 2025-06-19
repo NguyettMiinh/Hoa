@@ -180,6 +180,7 @@ const SignUpForm = () => {
                     </div>
 
                 </form>
+                
             </div>
 
         </div>
