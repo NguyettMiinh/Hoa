@@ -1,13 +1,15 @@
 import LayoutDefault from "../layout/Layout";
 import LoginForm from "../page/auth/LoginForm";
 import SignupForm from "../page/auth/SignupForm";
+import Home from "../page/home/Home";
 const routes = [
     {
         path:"/layout",
         element: <LayoutDefault />,
         children: [
             {path: "login", element: <LoginForm />},
-            {path: "register", element: <SignupForm />}
+            {path: "register", element: <SignupForm />},
+            {path: "home", element: <Home />},
         ]
     }
 ]

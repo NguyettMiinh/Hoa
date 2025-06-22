@@ -70,7 +70,7 @@ function HeaderCommon() {
             </div>
             <div className="bg-brand-darkRed h-[92px] pl-[50px] pr-[50px] pt-[10px] pb-[10px]">
                 <div className="flex justify-between items-center h-full pt-[30px] pb-[30px]">
-                    <Link to="/home">
+                    <Link to="/layout/home">
                         <img src={logoNobg} alt="Logo" className="h-[40px]" />
                     </Link>
                     <nav>
@@ -92,6 +92,7 @@ function HeaderCommon() {
                             className='w-[510px] border rounded-md outline-none'
                         />
 
+                        {/* thêm  badge cho giỏ hàng để hiển thị số lượng trong giỏ */}
                         <div>
                             <ShoppingCartOutlined className="text-white" style={{ fontSize: '24px' }} />
                         </div>
