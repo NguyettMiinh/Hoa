@@ -1,25 +1,24 @@
-import { Col } from "antd";
 import { HeartOutlined } from "@ant-design/icons";
-function GridSub() {
+function GridSub({ product }: { product: Product }) {
     return (
-        <Col span={4}>
-            <Col>
-                <img className="w-[184px] h-[184px]" />
-            </Col>
-            <Col className="h-[174px] w-[184px] text-[13px]">
+        <div>
+            <div>
+                <img src={product.img} className="w-[184px] h-[184px]  object-contain block mt-auto" />
+            </div>
+            <div className="h-[174px] w-[184px] text-[13px]">
                 <div className="flex flex-col pt-5 pr-5 pl-5">
-                    <div className="mb-[15px]">
-                        MUJI Gối Nâng Đỡ Đầu (Vỏ Có Thể Giặt) - L
+                    <div className="mb-[15px] h-[42px]">
+                        {product.name.length > 41 ? product.name.slice(0,41) + "..." : product.name}
                     </div>
-                    <div className="flex mb-2 text-brand-darkRed">
-                        <div className="pr-3">
-                            <span className="font-bold">1.668.000 </span>
+                    <div className="flex mb-2 items-end justify-between">
+                        <div className="flex pr-3 h-[42px] items-end text-brand-darkRed">
+                            <span className="font-bold mr-2">{product.price} </span>
                             <span className="text-[11px]">VND</span>
                         </div>
 
                         <div>
-                            <button>
-                                <HeartOutlined />
+                            <button className="h-[32px] w-[32px] rounded-full border border-[#E2D5B5] bg-[#F7F2E4]">
+                                <HeartOutlined style={{color: "#8c1000"}} />
                             </button>
                         </div>
                     </div>
@@ -28,41 +27,18 @@ function GridSub() {
                     </div>
                 </div>
 
-            </Col>
-        </Col>
+            </div>
+        </div>
 
-    );
+
+        );
 }
 
-const data = [{
-    name: "MUJI Gối Nâng Đỡ Đầu (Vỏ Có Thể Giặt) - L",
-    img: "https://api.muji.com.vn/media/catalog/product/cache/4da93324a1c25b12e9566f761e24b9c9/4/5/4550584666131_01_org_1.jpg",
-    price: "1.668.000"
-}, {
-    name: "MUJI Gối Nâng Đỡ Đầu (Vỏ Có Thể Giặt) - S",
-    img: "https://api.muji.com.vn/media/catalog/product/cache/4da93324a1c25b12e9566f761e24b9c9/4/5/4550584666131_01_org.jpg",
-    price: "1.668.000"
-}, {
-    name: "MUJI Kệ Chặn Sách - S",
-    img: "https://api.muji.com.vn/media/catalog/product/cache/4da93324a1c25b12e9566f761e24b9c9/4/5/4550182603071_org.jpg",
-    price: "48.000"
-}, {
-    name: "MUJI Bìa Phân Trang",
-    img: "https://api.muji.com.vn/media/catalog/product/cache/4da93324a1c25b12e9566f761e24b9c9/4/5/4550344296950_org.jpg",
-    price: "38.000"
-}, {
-    name: "MUJI Kẹo Dẻo Hỗn Hợp/ Mixed Gummy",
-    img: "https://api.muji.com.vn/media/catalog/product/cache/4da93324a1c25b12e9566f761e24b9c9/i/m/img_1044.jpeg",
-    price: "19.000"
-}, {
-    name: "MUJI Phí Lắp Ráp Khu Vực TP.HCM Và Hà Nội (Sản Phẩm Nội Thất)",
-    img: "https://api.muji.com.vn/media/catalog/product/cache/4da93324a1c25b12e9566f761e24b9c9/p/h/phi_la_p_ra_p_-_cover.jpg",
-    price: "500.000000"
-}, {
-    name: "MUJI Áo Sơ Mi Nam Vải Cool Touch Không Cổ Tay Ngắn - S - Trắng",
-    img: "https://api.muji.com.vn/media/catalog/product/cache/4da93324a1c25b12e9566f761e24b9c9/4/5/4550584641701_01_org_1.jpg",
-    price: "599.000"
+            type Product = {
+                name: string;
+            img: string;
+            price: string;
 }
-];
 
-export default GridSub;
+
+            export default GridSub;

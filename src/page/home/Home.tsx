@@ -30,7 +30,7 @@ function Home() {
 
             <div>
                 {/* nen viet component rieng cho cai này và truyền value ảnh vào */}
-                <div>
+                <div className="pl-[150px] pr-[150px]">
                     <GridSix />
                 </div>
 
