@@ -21,7 +21,7 @@ function GridSub({ product }: { product: Product }) {
                         {product.name.length > 41 ? product.name.slice(0, 41) + "..." : product.name}
                     </div>
                     <div className="flex mb-2 items-end justify-between">
-                        <div className="flex pr-3 h-[42px] items-end text-brand-darkRed">
+                        <div className="flex pr-3 h-[42px] items-end text-brand-darkGrayGreen">
                             <span className="font-bold mr-2">{product.price} </span>
                             <span className="text-[11px]">VND</span>
                         </div>
@@ -33,7 +33,7 @@ function GridSub({ product }: { product: Product }) {
                         </div>
                     </div>
                     <div>
-                        <button className="border w-[154px] h-[38px] text-[#3C3C43] font-bold hover:bg-brand-darkRed hover:text-white">Mua Hàng</button>
+                        <button className="border w-[154px] h-[38px] text-[#3C3C43] font-bold hover:bg-brand-darkGrayGreen hover:text-white">Mua Hàng</button>
                     </div>
                 </div>
 

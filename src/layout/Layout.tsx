@@ -6,8 +6,7 @@ import HeaderCommon from "./Header";
 const LayoutDefault = () => {
  
   return (
-    <>
-      <Layout className="min-h-screen">
+      <Layout className="min-h-screen ">
         <Layout>
             <HeaderCommon />
           <Content>
@@ -15,7 +14,7 @@ const LayoutDefault = () => {
           </Content>
         </Layout>
       </Layout>
-    </>
+
   );
 };
 

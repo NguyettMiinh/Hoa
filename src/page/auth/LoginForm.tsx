@@ -72,7 +72,7 @@ const LoginForm = () => {
           </div>
           <div className="mt-5 mb-5">
             <button type="submit"
-              className="flex w-full h-[56px] items-center justify-center rounded-md bg-brand-darkRed px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-[#8c1932] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:bg-[#8c1932]">Đăng nhập</button>
+              className="flex w-full h-[56px] items-center justify-center rounded-md bg-brand-darkGrayGreen px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-[#8c1932] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:bg-[#8c1932]">Đăng nhập</button>
           </div>
 
           <div className=" text-center mb-5">
@@ -85,7 +85,7 @@ const LoginForm = () => {
               Hãy tham gia cùng chúng tôi để nhận được thông báo về ưu đãi mới và mã giảm giá hấp dẫn.
             </div>
             <button onClick={handleRegister}
-              className="flex w-full h-[56px] items-center justify-center rounded-md border border-brand-darkRed bg-white px-3 py-1.5 text-sm/6 font-semibold text-brand-darkRed shadow-xs hover:bg-brand-darkRed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:bg-[#8c1932] hover:text-white">
+              className="flex w-full h-[56px] items-center justify-center rounded-md border border-brand-darkGrayGreen bg-white px-3 py-1.5 text-sm/6 font-semibold text-brand-darkGrayGreen shadow-xs hover:bg-brand-darkGrayGreen focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:bg-[#8c1932] hover:text-white">
               Đăng kí thành viên mới
             </button>
           </div>

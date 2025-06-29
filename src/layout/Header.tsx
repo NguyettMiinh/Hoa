@@ -42,20 +42,20 @@ function HeaderCommon() {
         transition-transform duration-300 ${isScrolled ? '-translate-y-[40px]' : ""}`}>
             <div className="bg-white h-[40px]">
                 <div className='flex justify-between items-center pr-[30px] pl-[300px]'>
-                    <div className="text-brand-darkRed">
+                    <div className="text-brand-darkGrayGreen">
                         <p>Miễn phí vận chuyển cho mọi đơn hàng từ 999.000 VNĐ - Hotline 1900 2555 79</p>
                     </div>
                     <div className='flex items-center mr-0'>
-                        <p className='text-brand-darkRed'>Tiếng Việt</p>
+                        <p className='text-brand-darkGrayGreen'>Tiếng Việt</p>
                         <Dropdown menu={{ items }} placement="bottomLeft">
                             <button className="border-none p-2">
-                                <DownOutlined style={{ fontSize: '12px', color: "#bf7f8c" }} />
+                                <DownOutlined style={{ fontSize: '12px', color: "#6b967f" }} />
                             </button>
                         </Dropdown>
                     </div>
-                    <div className="flex  gap-4 text-brand-darkRed">
+                    <div className="flex  gap-4 text-brand-darkGrayGreen">
                         <div> 
-                            <UserOutlined style={{ fontSize: '20px', color: "#80001c"}} />
+                            <UserOutlined style={{ fontSize: '20px', color: "#6b967f"}} />
                         </div>
                        
                         <div className="font-bold">
@@ -68,7 +68,7 @@ function HeaderCommon() {
                     </div>
                 </div>
             </div>
-            <div className="bg-brand-darkRed h-[92px] pl-[50px] pr-[50px] pt-[10px] pb-[10px]">
+            <div className="bg-brand-darkGrayGreen h-[92px] pl-[50px] pr-[50px] pt-[10px] pb-[10px]">
                 <div className="flex justify-between items-center h-full pt-[30px] pb-[30px]">
                     <Link to="/layout/home">
                         <img src={logoNobg} alt="Logo" className="h-[40px]" />
