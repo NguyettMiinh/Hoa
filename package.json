@@ -12,11 +12,13 @@
   "dependencies": {
     "@ant-design/icons": "^6.0.0",
     "@hookform/resolvers": "^5.1.1",
+    "@reduxjs/toolkit": "^2.8.2",
     "antd": "^5.26.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-hook-form": "^7.58.1",
     "react-image-magnify": "^2.7.4",
+    "react-redux": "^9.2.0",
     "react-router-dom": "^7.6.2",
     "react-slick": "^0.30.3",
     "slick-carousel": "^1.8.1",

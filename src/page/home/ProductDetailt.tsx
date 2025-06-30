@@ -5,6 +5,8 @@ import ReactImageMagnify from 'react-image-magnify';
 import { FacebookOutlined, MessageOutlined } from "@ant-design/icons";
 import Tabs  from "../../components/Tabs";
 import "../../assets/styles/product-details.css"
+import { useSelector } from "react-redux";
+import type { RootState } from "../../redux/store"; 
 const product: Product[] = [{
     id: 19,
     name: "MUJI [CN] Bộ 5 Ruột Mực Đen Cho Bút Máy - Đen",
@@ -18,6 +20,8 @@ const product: Product[] = [{
 function ProductDetail() {
     const [quantity, setQuantity] = useState<number>(1);
     const [selectedImg, setSelectedImg] = useState<string>(product[0].img[0]);
+    const seenArray = useSelector((state: RootState) => state.user.seenArray);
+    const userId = useSelector((state: RootState) => state.user.id);
     const handleDecrease = () => {
         console.log("hi");
         if (quantity > 1) {
@@ -47,7 +51,8 @@ function ProductDetail() {
     const handleImg = (img: string) => {
         setSelectedImg(img);
     }
-
+    console.log("Current seenArray in ProductDetail:", seenArray);
+    console.log("Current user ID in ProductDetail:", userId);
     return (
         <div className="common bg-white">
             <div className="flex flex-col justify-center items-center max-w-[1224px] w-full px-4 mx-auto">
@@ -134,7 +139,9 @@ function ProductDetail() {
                     <Tabs />
                 </div>
                 <div className="bg-yellow-100">
-                    <p>Hello4</p>
+                    <Slider>
+
+                    </Slider>
                 </div>
             </div >
         </div>

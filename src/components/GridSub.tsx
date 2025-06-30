@@ -1,19 +1,22 @@
 import { HeartOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import type { Product } from "../types/product";
+import { useDispatch } from "react-redux";
+import { setArray, setId } from "../redux/userSlice";
 function GridSub({ product }: { product: Product }) {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-    function handleDetail(id: number) {
-        console.log("hello");
+    function handleDetail(id: number, product: Product) {
+        dispatch(setId(id));
+        dispatch(setArray(product))
         navigate(`/layout/product/${id}`);
-        //  ta phải lưu id vào redux storestore
     }
     
     return (
         <div>
             <div>
-                <img src={product.img[0]} className="w-[184px] h-[184px]  object-contain block mt-auto" onClick={() => handleDetail(product.id)} />
+                <img src={product.img[0]} className="w-[184px] h-[184px]  object-contain block mt-auto" onClick={() => handleDetail(product.id,product)} />
             </div>
             <div className="h-[174px] w-[184px] text-[13px]">
                 <div className="flex flex-col pt-5 pr-5 pl-5">
