@@ -1,12 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Product } from "../../types/product";
 import Slider from "react-slick";
-import ReactImageMagnify from 'react-image-magnify';
 import { FacebookOutlined, MessageOutlined } from "@ant-design/icons";
-import Tabs  from "../../components/Tabs";
-import "../../assets/styles/product-details.css"
-import { useSelector } from "react-redux";
-import type { RootState } from "../../redux/store"; 
+import Tabs from "../../components/Tabs";
+import "../../assets/styles/product-details.css";
+
 const product: Product[] = [{
     id: 19,
     name: "MUJI [CN] Bộ 5 Ruột Mực Đen Cho Bút Máy - Đen",
@@ -15,30 +13,57 @@ const product: Product[] = [{
         "https://api.muji.com.vn/media/catalog/product/cache/2e9290695da361a7d6192a4c8c689807/4/5/4550344650400_02_org.jpg",
         "https://api.muji.com.vn/media/catalog/product/cache/3bba9d404b279092e39507dd78fb4be5/4/5/4550344650400_01_org.jpg",
     ],
-    price: "28.000"
+    price: "28.000",
+    stock: 10,
 }];
 function ProductDetail() {
-    const [quantity, setQuantity] = useState<number>(1);
+    const [quantity, setQuantity] = useState<number | string>(1);
     const [selectedImg, setSelectedImg] = useState<string>(product[0].img[0]);
-    const seenArray = useSelector((state: RootState) => state.user.seenArray);
-    const userId = useSelector((state: RootState) => state.user.id);
+    const [isError, setIsError] = useState<string>("");
+    const [disableMinus, setDisableMinus] = useState<boolean>(true);
+    const [disablePlus, setDisablePlus] = useState<boolean>(false);
     const handleDecrease = () => {
-        console.log("hi");
-        if (quantity > 1) {
-            setQuantity(quantity - 1);
-        } else {
+        const newQuantity = Number(quantity || 1);
+        if (newQuantity > 1) {
+            setDisablePlus(false);
+            setQuantity(newQuantity - 1);       
+        }else {
+            setDisableMinus(true);
             setQuantity(1);
-        }
+        }     
 
     }
     //neu them san pham: chi them toi da so luong trong kho
     const handleIncrease = () => {
-        setQuantity(quantity + 1);
-        //neu them so luong lon hon so luong hang con thi bao loi, so luong toi da là : xxxx
+        const numQuantity = Number(quantity || 0);
+        if (numQuantity >= product[0].stock) {
+            setIsError(`Số lượng tối đa là ${product[0].stock}`);
+            setQuantity(numQuantity);
+        } else {
+            setDisableMinus(false);
+            setQuantity(numQuantity + 1);
+        }
+
+
     }
-    //can 1 api de getProductDetail theo id
-    // neu nhu ban het thi disable nut them, nut add vao gio hang
-    // v id ở đâu mà truyền: ta sẽ phải lấy id từ redux
+    const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        if (value === '') {
+            setQuantity('');
+            return;
+        }
+        // do ko cho phep hien thi chuoi rong len nen ms nhu vay
+        if (!/^\d*$/.test(value) || value === '0') {
+            return;
+        }
+
+        const numValue = Number(value);
+        if (!isNaN(numValue) && numValue > 0) {
+            setQuantity(numValue);
+        }
+    };
+
+
     const verticalSettings = {
         dots: false,
         infinite: false,
@@ -51,8 +76,16 @@ function ProductDetail() {
     const handleImg = (img: string) => {
         setSelectedImg(img);
     }
-    console.log("Current seenArray in ProductDetail:", seenArray);
-    console.log("Current user ID in ProductDetail:", userId);
+    useEffect(() => {
+        if (isError) {
+            setDisablePlus(true);
+            const timer = setTimeout(() => {
+                setIsError("");
+            }, 1000);
+            return () => clearTimeout(timer);
+        }
+    }, [isError]);
+
     return (
         <div className="common bg-white">
             <div className="flex flex-col justify-center items-center max-w-[1224px] w-full px-4 mx-auto">
@@ -71,7 +104,7 @@ function ProductDetail() {
                         </Slider>
                     </div>
                     <div className="w-[600px] h-[600px]">
-                        <ReactImageMagnify
+                        {/* <ReactImageMagnify
                             {...{
                                 smallImage: {
                                     alt: 'Zoom image',
@@ -88,7 +121,8 @@ function ProductDetail() {
                                     background: "#fff"
                                 },
                             }}
-                        />
+                        /> */}
+                        <img src={selectedImg} />
                     </div>
                     <div className="pl-10 w-[450px]">
                         <div className="font-semibold text-[25px] mb-2">MUJI [CN] Bộ 5 Ruột Mực Đen Cho Bút Máy - Đen</div>
@@ -102,12 +136,17 @@ function ProductDetail() {
                                 <span>VND</span>
                             </div>
                             <div className="space-x-3 mb-5">
-                                <button onClick={() => handleDecrease()} className="h-[40px] w-[40px] rounded-lg bg-gray-300 font-bold">-</button>
-                                <input value={quantity} className="w-[56px] border h-[40px] rounded-lg text-center" />
-                                <button onClick={() => handleIncrease()} className="h-[40px] w-[40px] rounded-lg bg-gray-300 font-bold">+</button>
+                                <button onClick={() => handleDecrease()} disabled={disableMinus} className={`h-[40px] w-[40px] rounded-lg ${disableMinus === true ? "bg-gray-200 font-bold text-gray-300" : "bg-gray-300 font-bold"}`}>-</button>
+                                <input value={quantity} onChange={(e) => handleQuantityChange(e)} className="w-[56px] border h-[40px] rounded-lg text-center" />
+
+                                <button onClick={() => handleIncrease()} disabled={disablePlus} className={`h-[40px] w-[40px] rounded-lg ${disablePlus === true ? "bg-gray-200 font-bold text-gray-300" : "bg-gray-300 font-bold"} `}>+</button>
+
+                            </div>
+                            <div>
+                                {isError ? <span className="text-red-600">{isError}</span> : ""}
                             </div>
                             <div className="mb-2">
-                                <button className="w-[392px] h-[67px]  bg-[#3C3C43] text-white font-bold rounded-md hover:bg-brand-darkGrayGreen ">Thêm vào giỏ hàng</button>
+                                <button className="w-[392px] h-[67px]  bg-[#3C3C43] text-white font-bold rounded-md hover:bg-brand-darkGrayGreen ">Thêm vào giỏ hàng</button> 
                             </div>
                             <div>
                                 <button className="w-[392px] h-[67px]  rounded-md border-gray-300 border font-bold hover:bg-brand-darkGrayGreen hover:text-white">Mua nhanh</button>
@@ -137,11 +176,6 @@ function ProductDetail() {
                 </div>
                 <div className="w-full">
                     <Tabs />
-                </div>
-                <div className="bg-yellow-100">
-                    <Slider>
-
-                    </Slider>
                 </div>
             </div >
         </div>
