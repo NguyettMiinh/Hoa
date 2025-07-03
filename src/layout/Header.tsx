@@ -39,12 +39,12 @@ function HeaderCommon() {
     ]
 
     return (
-        <header id="header" className={`w-full sticky top-0 left-0 z-[100]
+        <header id="wrapper" className={`w-full sticky top-0 left-0 z-[100]
         transition-transform duration-300 ${isScrolled ? '-translate-y-[40px]' : ""}`}>
             {/* Header top: chi dung duoc flex cho the con truc tiep cua the cha */}
             <div className="top-header flex bg-white min-h-[40px]">
                 {/* container cha cua header top */}
-                    <div className="inline-block text-brand-darkGrayGreen">
+                    <div className="text-brand-darkGrayGreen">
                         Miễn phí vận chuyển cho mọi đơn hàng từ 999.000 VNĐ - Hotline 1900 2555 79
                     </div>
                     <div className="top-item">
