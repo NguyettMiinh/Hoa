@@ -16,7 +16,8 @@ function GridSub({ product }: { product: Product }) {
     return (
         <div>
             <div>
-                <img src={product.img[0]} className="w-[184px] h-[184px]  object-contain block mt-auto" onClick={() => handleDetail(product.id,product)} />
+                <img src={product.img[0]} className="w-[184px] h-[184px]  object-contain block mt-auto" 
+                onClick={() => handleDetail(product.id,product)} />
             </div>
             <div className="h-[174px] w-[184px] text-[13px]">
                 <div className="flex flex-col pt-5 pr-5 pl-5">

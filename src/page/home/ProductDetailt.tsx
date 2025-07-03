@@ -4,6 +4,9 @@ import Slider from "react-slick";
 import { FacebookOutlined, MessageOutlined } from "@ant-design/icons";
 import Tabs from "../../components/Tabs";
 import "../../assets/styles/product-details.css";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../redux/store";
+import GridSub from "../../components/GridSub";
 
 const product: Product[] = [{
     id: 19,
@@ -17,20 +20,25 @@ const product: Product[] = [{
     stock: 10,
 }];
 function ProductDetail() {
+
     const [quantity, setQuantity] = useState<number | string>(1);
     const [selectedImg, setSelectedImg] = useState<string>(product[0].img[0]);
     const [isError, setIsError] = useState<string>("");
     const [disableMinus, setDisableMinus] = useState<boolean>(true);
     const [disablePlus, setDisablePlus] = useState<boolean>(false);
+
+
+    const seenArray = useSelector((state: RootState) => state.user.seenArray);
+
     const handleDecrease = () => {
         const newQuantity = Number(quantity || 1);
         if (newQuantity > 1) {
             setDisablePlus(false);
-            setQuantity(newQuantity - 1);       
-        }else {
+            setQuantity(newQuantity - 1);
+        } else {
             setDisableMinus(true);
             setQuantity(1);
-        }     
+        }
 
     }
     //neu them san pham: chi them toi da so luong trong kho
@@ -86,6 +94,15 @@ function ProductDetail() {
         }
     }, [isError]);
 
+    const settings = {
+        dots: false,
+        infinite: false,
+        speed: 500,
+        slidesToShow: 6,
+        slidesToScroll: 1,
+        arrows: true,
+    };
+    console.log(seenArray);
     return (
         <div className="common bg-white">
             <div className="flex flex-col justify-center items-center max-w-[1224px] w-full px-4 mx-auto">
@@ -146,7 +163,7 @@ function ProductDetail() {
                                 {isError ? <span className="text-red-600">{isError}</span> : ""}
                             </div>
                             <div className="mb-2">
-                                <button className="w-[392px] h-[67px]  bg-[#3C3C43] text-white font-bold rounded-md hover:bg-brand-darkGrayGreen ">Thêm vào giỏ hàng</button> 
+                                <button className="w-[392px] h-[67px]  bg-[#3C3C43] text-white font-bold rounded-md hover:bg-brand-darkGrayGreen ">Thêm vào giỏ hàng</button>
                             </div>
                             <div>
                                 <button className="w-[392px] h-[67px]  rounded-md border-gray-300 border font-bold hover:bg-brand-darkGrayGreen hover:text-white">Mua nhanh</button>
@@ -178,6 +195,20 @@ function ProductDetail() {
                     <Tabs />
                 </div>
             </div >
+            <div className="flex h-full flex-col  hover:shadow-sm justify-between hover:bg-gray-50">
+                {/* tai sao no khon nam ngang */}
+                <Slider {...settings}>
+                      {seenArray.map((product, index) => (
+                        // <div key={index}>
+                        //     <div>
+                        //         {/* <img  src={product.img[0]} className="w[-184px] h-[184px]"/> */}
+                        //         <div>{product.price}</div>
+                        //     </div>
+                        // </div>
+                        <GridSub product={product} />
+                      ))}                  
+                </Slider>
+            </div>
         </div>
 
     );
