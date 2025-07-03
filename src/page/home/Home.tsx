@@ -13,8 +13,9 @@ function Home() {
         arrows: true,
     };
     return (
-        <div className="bg-white">
-            <div>
+        <div>
+            Hi
+            {/* <div>
                 <Slider {...settings} >
                     <div>
                         <img src={Sale1} />
@@ -29,12 +30,12 @@ function Home() {
             </div>
 
             <div>
-                {/* nen viet component rieng cho cai này và truyền value ảnh vào */}
+               
                 <div className="pl-[150px] pr-[150px]">
                     <GridSix />
                 </div>
 
-            </div>
+            </div> */}
 
         </div>
     );

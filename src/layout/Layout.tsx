@@ -1,19 +1,15 @@
 import { Outlet } from "react-router";
-const { Content } = Layout;
-import { Layout } from "antd";
 import HeaderCommon from "./Header";
 
 const LayoutDefault = () => {
  
   return (
-      <Layout className="min-h-screen ">
-        <Layout>
-            <HeaderCommon />
-          <Content>
-            <Outlet />
-          </Content>
-        </Layout>
-      </Layout>
+      <div className="wrapper w-full flex flex-col items-center">
+          <HeaderCommon />
+          <div className="container w-[1400px] bg-slate-400 h-[500px]">
+              <Outlet />
+          </div>
+      </div>
 
   );
 };
