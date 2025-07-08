@@ -9,7 +9,7 @@ module.exports = {
         brand: {
           darkGrayGreen: '#3d574e',
           grayGreen: '#4c6f60',
-          darkGrayGreen: '#1f342d',
+          darkGreen: '#1f342d',
           customGray: '#3c3c43',
           lightGray: '#6b967f'
         },
