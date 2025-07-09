@@ -3,6 +3,9 @@ import Logo from "../assets/Hoa-Logo.png";
 import { Link } from 'react-router-dom';
 import { ShoppingCartOutlined, SearchOutlined, DownOutlined, UserOutlined } from '@ant-design/icons';
 import "../assets/styles/header.css";
+import Dropdown from '../components/Dropdown';
+
+// component cha: truyen gia tri tu cha => component con
 function HeaderCommon() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isLang, setIsLang] = useState("Tiếng Việt");
@@ -11,6 +14,7 @@ function HeaderCommon() {
         eng: true
     });
     const [isOpen, setIsOpen] = useState(false);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 0);
@@ -65,44 +69,26 @@ function HeaderCommon() {
                     </div>
                     <div className='main-category'>
                         <ul className="main-item">
-                            <li className="title-item">Hàng Mới</li>
-                            <li className="title-item">Bán Chạy</li>
-                            <li className="title-item">Đồ gia dụng</li>
-                            <div className="absolute top-[53px] left-0 bg-white text-black
-                                w-full flex justify-between border rounded-lg shadow-md">
-                                    <div className='flex leading-6'>
-                                        <div className='drop-item'>
-                                            <div className="font-semibold mb-2">Dụng cụ gia đình</div>
-                                            <ul className="category-item space-y-1">
-                                                <li>Chổi đót</li>
-                                                <li>Chổi chà</li>
-                                                <li>Rổ tre</li>
-                                                <li>Nia</li>
-                                                <li>Thúng</li>
-                                            </ul>
-                                        </div>
-                                        <div className='drop-item'>
-                                            <div className="font-semibold mb-2">Vật dụng tre</div>
-                                            <ul className="category-item space-y-1">
-                                                <li>Giỏ đan tre</li>
-                                                <li>Ống đựng đũa</li>
-                                                <li>Ống bút tre</li>
-                                                <li>Lồng gà</li>
-                                                <li>Lồng vịt</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div className="drop-item col-span-1 border-l pl-6">
-                                        <div className="font-semibold mb-2">Ưu đãi đặc biệt</div>
-                                        <ul className="category-item space-y-1">
-                                            <li>Hàng Mới</li>
-                                            <li>Bán Chạy</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            <li className="title-item">Phụ kiện & Trang phục</li>
-                            <li className="title-item">Gốm sứ</li>
-                            <li className="title-item">Đồ trang trí</li>
+                            <li className="title-item font-bold" onMouseEnter={() => setIsDropdownOpen(false)}>Hàng Mới</li>
+                            <li className="title-item font-bold" onMouseEnter={() => setIsDropdownOpen(false)}>Bán Chạy</li>
+                            <li className="title-item">
+                                <span className='font-bold' onMouseEnter={() => setIsDropdownOpen(true)}>{categories[0].title}</span>
+                                <Dropdown isDropdownOpen={isDropdownOpen} setIsDropdownOpen={setIsDropdownOpen} category={categories[0]} />
+                            </li>
+
+                            {/* <li className="title-item">
+                                <span className='font-bold' onMouseEnter={() => setIsDropdownOpen(true)}>Phụ kiện & Trang phục</span>
+
+                                <Dropdown isDropdownOpen={isDropdownOpen} setIsDropdownOpen={setIsDropdownOpen} />
+                            </li>
+                            <li className="title-item">
+                                <span className='font-bold' onMouseEnter={() => setIsDropdownOpen(true)}>Gốm sứ</span>
+                                <Dropdown isDropdownOpen={isDropdownOpen} setIsDropdownOpen={setIsDropdownOpen} />
+                            </li>
+                            <li className="title-item">
+                                <span className='font-bold' onMouseEnter={() => setIsDropdownOpen(true)}>Đồ trang trí</span>
+                                <Dropdown isDropdownOpen={isDropdownOpen} setIsDropdownOpen={setIsDropdownOpen} />
+                            </li> */}
                         </ul>
                     </div>
                 </div>
@@ -112,3 +98,114 @@ function HeaderCommon() {
 }
 
 export default HeaderCommon;
+
+const categories =  [
+    {
+      "title": "Đồ gia dụng",
+      "subCategories": [
+        {
+          "title": "Dụng cụ gia đình",
+          "items": [
+            "Chổi đót",
+            "Chổi chà",
+            "Rổ tre",
+            "Nia",
+            "Thúng",
+            "Mâm tre",
+            "Rá tre",
+            "Sàng gạo"
+          ]
+        },
+        {
+          "title": "Vật dụng tre",
+          "items": [
+            "Giỏ đan tre",
+            "Ống đựng đũa",
+            "Ống bút tre",
+            "Lồng gà",
+            "Lồng vịt",
+            "Hộp cơm tre",
+            "Thùng đựng nước bằng tre"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Phụ kiện & Trang phục",
+      "subCategories": [
+        {
+          "title": "Phụ kiện thủ công",
+          "items": [
+            "Túi vải thổ cẩm",
+            "Ví cầm tay gấm",
+            "Móc khóa thêu tay",
+            "Vòng tay đan mây",
+            "Khăn choàng lụa",
+            "Khăn rằn"
+          ]
+        },
+        {
+          "title": "Trang phục truyền thống",
+          "items": [
+            "Áo dài cách tân",
+            "Áo bà ba",
+            "Váy dân tộc",
+            "Áo tứ thân",
+            "Nón lá",
+            "Dép cói"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Gốm sứ",
+      "subCategories": [
+        {
+          "title": "Đồ dùng ăn uống",
+          "items": [
+            "Bát gốm Bát Tràng",
+            "Đĩa sứ vẽ tay",
+            "Bình trà thủ công",
+            "Ly uống nước gốm",
+            "Chén nước mắm"
+          ]
+        },
+        {
+          "title": "Trang trí gốm",
+          "items": [
+            "Bình hoa gốm",
+            "Chậu cây mini",
+            "Tượng gốm thủ công",
+            "Đèn gốm",
+            "Đĩa treo tường"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Đồ trang trí",
+      "subCategories": [
+        {
+          "title": "Trang trí nhà cửa",
+          "items": [
+            "Đèn lồng Hội An",
+            "Tranh thêu tay",
+            "Khung ảnh tre",
+            "Tường vải thêu",
+            "Tranh gạo",
+            "Chuông gió tre"
+          ]
+        },
+        {
+          "title": "Trang trí lễ hội",
+          "items": [
+            "Lồng đèn giấy",
+            "Cờ dây trang trí",
+            "Hoa giấy",
+            "Pháo hoa giả",
+            "Dây treo phong thủy"
+          ]
+        }
+      ]
+    }
+  ];

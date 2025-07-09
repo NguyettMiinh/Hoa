@@ -5,9 +5,6 @@
 
 }
 
-.title-item {
-    font-weight: 600;
-}
 
 .main-header .main-category .main-item > li:hover {
     text-decoration: underline;
@@ -15,7 +12,7 @@
 
 }
 
-.main-header .main-item .drop-item {
+.drop-item {
    padding: 30px 50px;
 }
 

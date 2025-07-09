@@ -5,3 +5,13 @@ export type Product = {
     price: string;
     stock?: number | 0;
 }
+
+export type ProductItem = string;
+export interface SubCategory {
+    title: string;
+    items: ProductItem[];
+}
+export interface Category {
+    title: string;
+    subCategories: SubCategory[];
+}
