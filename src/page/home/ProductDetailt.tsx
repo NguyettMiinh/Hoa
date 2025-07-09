@@ -6,7 +6,7 @@ import Tabs from "../../components/Tabs";
 import "../../assets/styles/product-details.css";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../redux/store";
-import GridSub from "../../components/GridSub";
+import GridSub from "../../components/ProductItem";
 
 const product: Product[] = [{
     id: 19,

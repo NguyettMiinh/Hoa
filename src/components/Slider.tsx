@@ -1,6 +1,8 @@
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
-
+import banner1 from "../../src/assets/Banner-1.png";
+import banner2 from "../../src/assets/Banner-2.png";
+import banner3 from "../../src/assets/Banner-3.png";
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -30,13 +32,13 @@ export default function Slider() {
       >
         {/* dùng mang map ra */}
         <SwiperSlide>
-          <img src="https://api.muji.com.vn/media/mageplaza/bannerslider/banner/image/v/n/vnpay_-_desk.png" />
+          <img src={banner1} />
         </SwiperSlide>
         <SwiperSlide>
-          <img src="https://api.muji.com.vn/media/mageplaza/bannerslider/banner/image/s/u/summer_-_desk_1.png" />
+          <img src={banner2}  />
         </SwiperSlide>
         <SwiperSlide>
-          <img src="https://api.muji.com.vn/media/mageplaza/bannerslider/banner/image/a/r/artboard_9.png" />
+          <img src={banner3}  />
         </SwiperSlide>
       </Swiper>
     </div>

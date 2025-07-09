@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import type { Product } from "../types/product";
 import { useDispatch } from "react-redux";
 import { setArray, setId } from "../redux/userSlice";
-function GridSub({ product }: { product: Product }) {
+function ProductItem({ product }: { product: Product }) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -51,4 +51,4 @@ function GridSub({ product }: { product: Product }) {
 
 
 
-export default GridSub;
+export default ProductItem;

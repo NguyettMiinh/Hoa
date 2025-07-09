@@ -1,6 +1,6 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import GridSub from "./GridSub";
+import GridSub from "./ProductItem";
 import Slider from "react-slick";
 import "../assets/styles/home.css";
 
