@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Logo from "../assets/Hoa-Logo.png";
 import { Link } from 'react-router-dom';
-import { ShoppingCartOutlined, SearchOutlined, DownOutlined, UserOutlined } from '@ant-design/icons';
+import { ShoppingCartOutlined, SearchOutlined, DownOutlined, UserOutlined, CloseOutlined } from '@ant-design/icons';
 import "../assets/styles/header.css";
 import Dropdown from '../components/Dropdown';
 
@@ -15,6 +15,7 @@ function HeaderCommon() {
     });
     const [isOpen, setIsOpen] = useState(false);
     const [activeCategoryIndex, setActiveCategoryIndex] = useState<number | null>(null);
+    const [search, setSearch] = useState<string>("");
     useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 0);
@@ -36,6 +37,7 @@ function HeaderCommon() {
             console.log("hello");
         }
     }
+  
 
     return (
         <header id="wrapper" className={`w-full sticky top-0 left-0 z-[100]
@@ -62,9 +64,9 @@ function HeaderCommon() {
                     </div>
                 </div>
             </div>
-            <div className="main-header flex justify-center items-center h-[60px] w-full bg-brand-darkGreen"
+            <div className="main-header flex justify-center items-center h-[92px] w-full bg-brand-darkGreen"
                 onMouseLeave={() => setActiveCategoryIndex(null)}>
-                <div className='w-[1400px] flex items-center relative'>
+                <div className='w-[1500px] flex items-center justify-between relative gap-x-4'>
                     <div className='pr-5'>
                         <Link to="/layout/home"><img src={Logo} className='h-[45px]' /></Link>
                     </div>
@@ -81,8 +83,23 @@ function HeaderCommon() {
                             ))}
                         </ul>
                     </div>
+
+                    <div className="flex items-center gap-x-4">
+                        <form className='bg-white px-[10px] py-[5px] border rounded-lg'>
+                            <button type="button" className='pr-3'><SearchOutlined /></button>
+                            <input value = {search} className="outline-none w-[510px] h-[26px]" onChange = {(e) => setSearch(e.target.value)} />
+                            <button type="button" onClick={() => setSearch("")}> <CloseOutlined /></button>
+                        </form>
+                        <div>
+                            <button><ShoppingCartOutlined style={{ color: "white", fontSize: "24px" }} /></button>
+                        </div>
+                    </div>
+
+
                 </div>
+
             </div>
+
         </header>
     )
 }
