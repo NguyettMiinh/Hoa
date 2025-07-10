@@ -14,7 +14,7 @@ function HeaderCommon() {
         eng: true
     });
     const [isOpen, setIsOpen] = useState(false);
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [activeCategoryIndex, setActiveCategoryIndex] = useState<number | null>(null);
     useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 0);
@@ -62,33 +62,23 @@ function HeaderCommon() {
                     </div>
                 </div>
             </div>
-            <div className="main-header flex justify-center items-center h-[60px] w-full bg-brand-darkGreen">
+            <div className="main-header flex justify-center items-center h-[60px] w-full bg-brand-darkGreen"
+                onMouseLeave={() => setActiveCategoryIndex(null)}>
                 <div className='w-[1400px] flex items-center relative'>
                     <div className='pr-5'>
                         <Link to="/layout/home"><img src={Logo} className='h-[45px]' /></Link>
                     </div>
                     <div className='main-category'>
                         <ul className="main-item">
-                            <li className="title-item font-bold" onMouseEnter={() => setIsDropdownOpen(false)}>Hàng Mới</li>
-                            <li className="title-item font-bold" onMouseEnter={() => setIsDropdownOpen(false)}>Bán Chạy</li>
-                            <li className="title-item">
-                                <span className='font-bold' onMouseEnter={() => setIsDropdownOpen(true)}>{categories[0].title}</span>
-                                <Dropdown isDropdownOpen={isDropdownOpen} setIsDropdownOpen={setIsDropdownOpen} category={categories[0]} />
-                            </li>
-
-                            {/* <li className="title-item">
-                                <span className='font-bold' onMouseEnter={() => setIsDropdownOpen(true)}>Phụ kiện & Trang phục</span>
-
-                                <Dropdown isDropdownOpen={isDropdownOpen} setIsDropdownOpen={setIsDropdownOpen} />
-                            </li>
-                            <li className="title-item">
-                                <span className='font-bold' onMouseEnter={() => setIsDropdownOpen(true)}>Gốm sứ</span>
-                                <Dropdown isDropdownOpen={isDropdownOpen} setIsDropdownOpen={setIsDropdownOpen} />
-                            </li>
-                            <li className="title-item">
-                                <span className='font-bold' onMouseEnter={() => setIsDropdownOpen(true)}>Đồ trang trí</span>
-                                <Dropdown isDropdownOpen={isDropdownOpen} setIsDropdownOpen={setIsDropdownOpen} />
-                            </li> */}
+                            <li className="title-item font-bold">Hàng Mới</li>
+                            <li className="title-item font-bold">Bán Chạy</li>
+                            {categories.map((category, index) => (
+                                <li key={index} className='title-item'
+                                    onMouseEnter={() => setActiveCategoryIndex(index)}>
+                                    <span className='font-bold'>{category.title}</span>
+                                    <Dropdown isOpen={activeCategoryIndex === index} category={category} onClose={() => setActiveCategoryIndex(null)} />
+                                </li>
+                            ))}
                         </ul>
                     </div>
                 </div>
@@ -99,113 +89,113 @@ function HeaderCommon() {
 
 export default HeaderCommon;
 
-const categories =  [
+const categories = [
     {
-      "title": "Đồ gia dụng",
-      "subCategories": [
-        {
-          "title": "Dụng cụ gia đình",
-          "items": [
-            "Chổi đót",
-            "Chổi chà",
-            "Rổ tre",
-            "Nia",
-            "Thúng",
-            "Mâm tre",
-            "Rá tre",
-            "Sàng gạo"
-          ]
-        },
-        {
-          "title": "Vật dụng tre",
-          "items": [
-            "Giỏ đan tre",
-            "Ống đựng đũa",
-            "Ống bút tre",
-            "Lồng gà",
-            "Lồng vịt",
-            "Hộp cơm tre",
-            "Thùng đựng nước bằng tre"
-          ]
-        }
-      ]
+        "title": "Đồ gia dụng",
+        "subCategories": [
+            {
+                "title": "Dụng cụ gia đình",
+                "items": [
+                    "Chổi đót",
+                    "Chổi chà",
+                    "Rổ tre",
+                    "Nia",
+                    "Thúng",
+                    "Mâm tre",
+                    "Rá tre",
+                    "Sàng gạo"
+                ]
+            },
+            {
+                "title": "Vật dụng tre",
+                "items": [
+                    "Giỏ đan tre",
+                    "Ống đựng đũa",
+                    "Ống bút tre",
+                    "Lồng gà",
+                    "Lồng vịt",
+                    "Hộp cơm tre",
+                    "Thùng đựng nước bằng tre"
+                ]
+            }
+        ]
     },
     {
-      "title": "Phụ kiện & Trang phục",
-      "subCategories": [
-        {
-          "title": "Phụ kiện thủ công",
-          "items": [
-            "Túi vải thổ cẩm",
-            "Ví cầm tay gấm",
-            "Móc khóa thêu tay",
-            "Vòng tay đan mây",
-            "Khăn choàng lụa",
-            "Khăn rằn"
-          ]
-        },
-        {
-          "title": "Trang phục truyền thống",
-          "items": [
-            "Áo dài cách tân",
-            "Áo bà ba",
-            "Váy dân tộc",
-            "Áo tứ thân",
-            "Nón lá",
-            "Dép cói"
-          ]
-        }
-      ]
+        "title": "Phụ kiện & Trang phục",
+        "subCategories": [
+            {
+                "title": "Phụ kiện thủ công",
+                "items": [
+                    "Túi vải thổ cẩm",
+                    "Ví cầm tay gấm",
+                    "Móc khóa thêu tay",
+                    "Vòng tay đan mây",
+                    "Khăn choàng lụa",
+                    "Khăn rằn"
+                ]
+            },
+            {
+                "title": "Trang phục truyền thống",
+                "items": [
+                    "Áo dài cách tân",
+                    "Áo bà ba",
+                    "Váy dân tộc",
+                    "Áo tứ thân",
+                    "Nón lá",
+                    "Dép cói"
+                ]
+            }
+        ]
     },
     {
-      "title": "Gốm sứ",
-      "subCategories": [
-        {
-          "title": "Đồ dùng ăn uống",
-          "items": [
-            "Bát gốm Bát Tràng",
-            "Đĩa sứ vẽ tay",
-            "Bình trà thủ công",
-            "Ly uống nước gốm",
-            "Chén nước mắm"
-          ]
-        },
-        {
-          "title": "Trang trí gốm",
-          "items": [
-            "Bình hoa gốm",
-            "Chậu cây mini",
-            "Tượng gốm thủ công",
-            "Đèn gốm",
-            "Đĩa treo tường"
-          ]
-        }
-      ]
+        "title": "Gốm sứ",
+        "subCategories": [
+            {
+                "title": "Đồ dùng ăn uống",
+                "items": [
+                    "Bát gốm Bát Tràng",
+                    "Đĩa sứ vẽ tay",
+                    "Bình trà thủ công",
+                    "Ly uống nước gốm",
+                    "Chén nước mắm"
+                ]
+            },
+            {
+                "title": "Trang trí gốm",
+                "items": [
+                    "Bình hoa gốm",
+                    "Chậu cây mini",
+                    "Tượng gốm thủ công",
+                    "Đèn gốm",
+                    "Đĩa treo tường"
+                ]
+            }
+        ]
     },
     {
-      "title": "Đồ trang trí",
-      "subCategories": [
-        {
-          "title": "Trang trí nhà cửa",
-          "items": [
-            "Đèn lồng Hội An",
-            "Tranh thêu tay",
-            "Khung ảnh tre",
-            "Tường vải thêu",
-            "Tranh gạo",
-            "Chuông gió tre"
-          ]
-        },
-        {
-          "title": "Trang trí lễ hội",
-          "items": [
-            "Lồng đèn giấy",
-            "Cờ dây trang trí",
-            "Hoa giấy",
-            "Pháo hoa giả",
-            "Dây treo phong thủy"
-          ]
-        }
-      ]
+        "title": "Đồ trang trí",
+        "subCategories": [
+            {
+                "title": "Trang trí nhà cửa",
+                "items": [
+                    "Đèn lồng Hội An",
+                    "Tranh thêu tay",
+                    "Khung ảnh tre",
+                    "Tường vải thêu",
+                    "Tranh gạo",
+                    "Chuông gió tre"
+                ]
+            },
+            {
+                "title": "Trang trí lễ hội",
+                "items": [
+                    "Lồng đèn giấy",
+                    "Cờ dây trang trí",
+                    "Hoa giấy",
+                    "Pháo hoa giả",
+                    "Dây treo phong thủy"
+                ]
+            }
+        ]
     }
-  ];
+];

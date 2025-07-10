@@ -1,20 +1,20 @@
-import type { Dispatch, SetStateAction } from 'react';
+import type {  MouseEventHandler } from 'react';
 import type { Category } from '../types/product';
 import "../assets/styles/header.css";
 // component con
 type Dropdown = {
-    isDropdownOpen: boolean;
-    setIsDropdownOpen: Dispatch<SetStateAction<boolean>>;
+    isOpen: boolean;
+    onClose: MouseEventHandler<HTMLDivElement>;
     category: Category;
 }
 
 
-function Dropdown({ isDropdownOpen, setIsDropdownOpen, category }: Dropdown) {
+function Dropdown({ isOpen, category, onClose}: Dropdown) {
 
     return (
         <div className={`absolute top-[53px] left-0 bg-white text-black
-            w-full flex justify-between border rounded-lg shadow-md ${isDropdownOpen ? "flex" : "hidden"}`}
-            onMouseLeave={() => setIsDropdownOpen(false)} >
+            w-full flex justify-between border rounded-lg shadow-md ${isOpen ? "flex" : "hidden"}`}
+            onMouseLeave={onClose}>
             <div className='flex leading-7' >
                 {category.subCategories.map((sub, index) => (
                     <div key={index} className='drop-item'>
