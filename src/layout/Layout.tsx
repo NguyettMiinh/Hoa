@@ -6,8 +6,8 @@ const LayoutDefault = () => {
  
   return (
       <div>
-          <HeaderCommon />
-          <div>
+          <HeaderCommon  />
+          <div className="container-content">
               <Outlet />
           </div>
           <Footer />

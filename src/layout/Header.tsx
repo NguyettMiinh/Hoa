@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Logo from "../assets/Hoa-Logo.png";
 import { Link } from 'react-router-dom';
 import { ShoppingCartOutlined, SearchOutlined, DownOutlined, UserOutlined, CloseOutlined } from '@ant-design/icons';
 import "../assets/styles/header.css";
 import Dropdown from '../components/Dropdown';
+
 
 // component cha: truyen gia tri tu cha => component con
 function HeaderCommon() {
@@ -16,14 +17,27 @@ function HeaderCommon() {
     const [isOpen, setIsOpen] = useState(false);
     const [activeCategoryIndex, setActiveCategoryIndex] = useState<number | null>(null);
     const [search, setSearch] = useState<string>("");
+    const [searchDropdown, setSearchDropdown] = useState<boolean>(false);
+    const headerRef = useRef<HTMLInputElement>(null);
+
     useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 0);
         };
+        const handleClickOutside = (event: MouseEvent) => {
+            if (headerRef.current &&
+                !headerRef.current.contains(event.target as Node) &&
+                document.body.className !== "swiper-wrapper") {
+                setSearchDropdown(false);
+            }
+
+        }
 
         window.addEventListener('scroll', handleScroll);
+        document.addEventListener('mousedown', handleClickOutside);
         return () => {
             window.removeEventListener('scroll', handleScroll);
+            document.removeEventListener('mousedown', handleClickOutside);
         };
     }, []);
 
@@ -34,10 +48,15 @@ function HeaderCommon() {
         } else {
             setDisableLang({ ...disableLang, vie: false, eng: true })
             setIsLang("English");
-            console.log("hello");
         }
     }
-  
+    const handleSearch = () => {
+        setSearch("");
+        setSearchDropdown(true);
+    }
+
+
+
 
     return (
         <header id="wrapper" className={`w-full sticky top-0 left-0 z-[100]
@@ -50,7 +69,7 @@ function HeaderCommon() {
                     <div className='flex gap-12'>
                         <div className="relative px-4">
                             <button className='w-[100px]' onClick={() => isOpen ? setIsOpen(false) : setIsOpen(true)}>{isLang} <DownOutlined style={{ fontSize: "12px", paddingLeft: "3px" }} /></button>
-                            <div className={`${isOpen ? " " : "hidden"} absolute bg-white menu-lang border rounded-lg top-[31px] left-0 shadow-md w-full text-center py-2`}>
+                            <div className={`${isOpen ? " " : "hidden"} absolute bg-white menu-lang border rounded-lg top-[31px] left-0 shadow-md w-full text-center py-2 z-[101]`}>
                                 <button onClick={() => handleLang("Tiếng Việt")} disabled={disableLang.vie} className={`px-5 py-2 ${disableLang.vie ? "font-semibold" : "hover:bg-slate-100"}`}>Tiếng Việt</button>
                                 <button onClick={() => handleLang("English")} disabled={disableLang.eng} className={`px-8 py-2 ${disableLang.eng ? "font-semibold" : "hover:bg-slate-100"}`}>English</button>
                             </div>
@@ -84,14 +103,37 @@ function HeaderCommon() {
                         </ul>
                     </div>
 
-                    <div className="flex items-center gap-x-4">
-                        <form className='bg-white px-[10px] py-[5px] border rounded-lg'>
-                            <button type="button" className='pr-3'><SearchOutlined /></button>
-                            <input value = {search} className="outline-none w-[510px] h-[26px]" onChange = {(e) => setSearch(e.target.value)} />
-                            <button type="button" onClick={() => setSearch("")}> <CloseOutlined /></button>
-                        </form>
+                    <div className="flex items-center gap-x-4"
+                        onMouseEnter={() => setActiveCategoryIndex(null)}
+                    >
+                        <div className="relative w-fit" >
+                            <form className={`bg-white px-[10px] py-[5px] border ${searchDropdown ? 'rounded-t-lg border-b-0' : 'rounded-lg'}`}>
+                                <button type="button" className='pr-3'><SearchOutlined /></button>
+                                <input ref={headerRef} value={search} className="outline-none w-[510px] h-[26px]"
+                                    onChange={(e) => setSearch(e.target.value)}
+                                    onClick={() => setSearchDropdown(true)}
+                                />
+                                <button type="button" onClick={() => handleSearch()}>
+                                    <CloseOutlined />
+                                </button>
+                            </form>
+                            <div className={`absolute bg-white top-[37px] w-full z-[10] ${searchDropdown ? 'block' : 'hidden'}`}>
+                                <ul className='py-8 px-5 leading-8 z-[100]'>
+                                    <li className='font-bold text-lg'>Tìm kiếm phổ biến</li>
+                                    <li>Giỏ</li>
+                                    <li>Chổi</li>
+                                    <li>Rổ</li>
+                                    <li>Áo</li>
+                                    <li>Khăn</li>
+                                </ul>
+                            </div>
+                        </div>
+
                         <div>
-                            <button><ShoppingCartOutlined style={{ color: "white", fontSize: "24px" }} /></button>
+                            <button>
+                                <ShoppingCartOutlined style={{ color: "white", fontSize: "24px" }} />
+                            </button>
+
                         </div>
                     </div>
 

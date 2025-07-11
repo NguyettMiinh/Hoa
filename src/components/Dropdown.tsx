@@ -12,7 +12,7 @@ type Dropdown = {
 function Dropdown({ isOpen, category, onClose}: Dropdown) {
 
     return (
-        <div className={`absolute top-[53px] left-0 bg-white text-black
+        <div className={`absolute top-[70px] left-0 bg-white text-black
             w-full flex justify-between border rounded-lg shadow-md ${isOpen ? "flex" : "hidden"}`}
             onMouseLeave={onClose}>
             <div className='flex leading-7' >

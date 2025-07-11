@@ -1,3 +1,4 @@
+
 import Slider from "../../components/Slider";
 import SliderItem from "../../components/SliderItem";
 import saleBanner from "../../assets/sale-banner.png";
@@ -7,9 +8,10 @@ type Data = {
   type: string;
 }
 function Home() {
+
   return (
-    <div>
-      <div className="banner-slider">
+    <div className="home-container">
+      <div className="banner-slider" >
         <Slider />
       </div>
       <div className="overflow-hidden w-full flex gap-10 lg:gap-[60px] flex-col px-[100px]">
